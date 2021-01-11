@@ -10,8 +10,7 @@ class MdhApplicationTests {
 
     @Test
     void contextLoads() {
-        JpaTest jpaTest = new JpaTest();
-        jpaTest.addTest();
+
     }
 
 }

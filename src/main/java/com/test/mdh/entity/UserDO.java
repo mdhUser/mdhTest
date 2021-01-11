@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "user", schema = "hibernate", catalog = "")
-public class UserEntity {
+public class UserDO {
     private int id;
     private String name;
     private Integer age;
@@ -60,7 +60,7 @@ public class UserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        UserDO that = (UserDO) o;
         return id == that.id && Objects.equals(name, that.name) && Objects.equals(age, that.age) && Objects.equals(createTime, that.createTime);
     }
 

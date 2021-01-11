@@ -2,10 +2,11 @@ package com.test.mdh;
 
 import com.test.mdh.dao.AuthorDao;
 import com.test.mdh.entity.AuthorDO;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
 
 /**
  * Create by maodihui on 2020/12/30
@@ -17,8 +18,8 @@ public class JpaTest {
     private AuthorDao authorDao;
 
 
-    @Before
-    public void create() {
+    @Test
+    public void addTest(){
         AuthorDO authorDO = new AuthorDO();
         authorDO.setAccount("jdsk");
         authorDO.setBook("十日谈");
@@ -43,11 +44,8 @@ public class JpaTest {
         authorDO4.setBook("十日谈");
         authorDO4.setPwd("ndish134");
         authorDao.save(authorDO4);
-    }
 
-    @Test
-    public void addTest(){
-        AuthorDO authorDO =new AuthorDO();
+        authorDO =new AuthorDO();
         authorDO.setAccount("jdsk");
         authorDO.setBook("十日谈");
         authorDO.setPwd("ndish134");
@@ -55,6 +53,36 @@ public class JpaTest {
 
     }
 
+    @Test
+    public void queryTest()
+    {
+   /* List<AuthorDO> dos = authorDao.findAuthorDOByAccount("jdsk");
+      dos.forEach(a->{
+          System.out.println(a+",");
+      });
+      List<AuthorDO> list = authorDao.findAllByIdGreaterThan(2L);
+        list.forEach(a->{
+            System.out.println(a+",");
+        });*/
+        int i = authorDao.updateAuthor(4L, "zkx", "loveMdhFuckMe");
+        System.out.println(i);
+        AuthorDO authorDO = authorDao.findById(4L).get();
+        System.out.println(authorDO);
 
+    }
+
+    @Test
+    public void updateTest(){
+       AuthorDO authorDO = authorDao.findById(3L).get();
+       System.out.println(authorDO);
+       authorDO.setAccount("mdhFuckMe");
+       authorDO.setName("zkx");
+       authorDao.save(authorDO);
+    }
+
+    @Test
+    public void deleteTest(){
+        authorDao.deleteById(6L);
+    }
 
 }
